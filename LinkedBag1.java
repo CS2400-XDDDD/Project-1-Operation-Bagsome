@@ -158,6 +158,36 @@ public final class LinkedBag1<T> implements BagInterface<T>
 		// Returns result
 		return unionBag;
 	}
+
+	public BagInterface<T> intersection(BagInterface<T> anotherBag) 
+	{
+		//Creates a new bag to return with the intersection
+		BagInterface<T> intersectBag = new LinkedBag1<>();
+
+		// Converts both bags to arrays
+		T[] bagOneArray = this.toArray();
+		T[] bagTwoArray = anotherBag.toArray();
+
+		// Loops through the first bag to find the next value
+		for (int x = 0; x < bagOneArray.length; x++) {
+			// Sets the value in the array to the variable for comparison
+			T valueOne = bagOneArray[x];
+			// Loops through the second bag to find the next value
+			for(int y = 0; y < bagTwoArray.length; y++) {
+				// Sets the value in the array to the variable for comparison
+				T valueTwo = bagTwoArray[y];
+				// Compares both of the bags' values to each other.
+				if (valueOne.equals(valueTwo)) {
+					// Adds the similar value to the bag of intersections
+					intersectBag.add(valueOne);
+					// Sets the found values to null to avoid duplicates
+					bagOneArray[x] = null;
+					bagTwoArray[y] = null;
+				}
+			}
+		}
+		return intersectBag;
+	}
 } // end LinkedBag1
 
 
