@@ -4,7 +4,7 @@
 XDDDD
 
 ## Group Members:
-Garrett Masuda -
+Garrett Masuda - gsmasuda@cpp.edu
 
 Mason Orton - maorton@cpp.edu
 
