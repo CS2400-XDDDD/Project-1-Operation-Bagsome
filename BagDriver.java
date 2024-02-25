@@ -39,6 +39,17 @@ public class BagDriver {
         BagInterface<String> unionBagTwo = bagOne.union(bagThree);
         printBag(unionBagTwo);
 
+        BagInterface<String> intersectionBagOne = bagOne.intersection(bagTwo);
+        System.out.print("\n The intersection of Bags One and Two:");
+        printBag(intersectionBagOne);
+        
+        BagInterface<String> intersectionBagTwo = bagTwo.intersection(bagThree);
+        System.out.print("\n The intersection of Bags Two and Three:");
+        printBag(intersectionBagTwo);
+
+        BagInterface<String> intersectionBagUnion = unionBag.intersection(unionBagTwo);
+        System.out.print("\n The intersection of Union Bags One and Two:");
+        printBag(intersectionBagUnion);
 
         //unionBag = bagOne.union(bagTwo);
         //printBag(unionBag);

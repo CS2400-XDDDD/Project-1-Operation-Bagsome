@@ -48,4 +48,6 @@ public interface BagInterface<T>
 	public T[] toArray();
 
 	public BagInterface<T> union(BagInterface<T> anotherBag);
+
+	public BagInterface<T> intersection(BagInterface<T> anotherBag);
 } // end BagInterface
