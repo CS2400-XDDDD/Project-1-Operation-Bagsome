@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
 /**
    A class that implements a bag of objects by using an array.
 	The bag is never full.
