@@ -275,6 +275,43 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
 		}
 		return intersectBag;
 	}
+	
+	public BagInterface<T> difference(BagInterface<T> otherBag) {
+	      checkintegrity(); // Ensure integrity of current bag
+	
+	      // Create a new bag to store the difference
+	      ResizableArrayBag<T> differenceBag = new ResizableArrayBag<>();
+	
+	      //Create an array from bag that has no duplicates
+	      Set<T> tempSet = new HashSet<>();
+	      for (T element : bag) {
+	         if (element != null) {
+	            tempSet.add(element);
+	         }
+	      }
+	
+	      @SuppressWarnings("unchecked")
+	      T[] tempArray = (T[]) new Object[tempSet.size()]; // Create an array of the same type as the input
+	      T[] noDuplicates =  tempSet.toArray(tempArray);
+	
+	     for (int i = 0; i < noDuplicates.length; i++) {
+	         T currentEntry = noDuplicates[i];
+	
+	         // Check if entry exists in otherBag with the same frequency
+	         int frequencyInOtherBag = otherBag.getFrequencyOf(currentEntry);
+	
+	         // If current entry frequency in this bag exceeds otherBag's, add the difference
+	         if (getFrequencyOf(currentEntry) > frequencyInOtherBag) {
+	            int differenceFrequency = getFrequencyOf(currentEntry) - frequencyInOtherBag;
+	            for (int j = 0; j < differenceFrequency; j++) {
+	               differenceBag.add(currentEntry); // Add with remaining frequency
+	            }
+	         }
+	      }// end of for loop
+	
+	
+		return differenceBag; // Return the new bag containing the difference
+	} //end of difference method
 } // end ResizableArrayBag
 
 /*
