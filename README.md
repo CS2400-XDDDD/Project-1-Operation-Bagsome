@@ -6,7 +6,7 @@ XDDDD
 ## Group Members:
 Garrett Masuda -
 
-Mason Orton - 
+Mason Orton - maorton@cpp.edu
 
 Bijou Raj - bbraj@cpp.edu - BijouRaj
 
