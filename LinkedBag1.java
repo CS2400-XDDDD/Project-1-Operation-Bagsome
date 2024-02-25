@@ -14,7 +14,7 @@ public final class LinkedBag1<T> implements BagInterface<T>
 	public LinkedBag1()
 	{
 		firstNode = null;
-      numberOfEntries = 0;
+      		numberOfEntries = 0;
 	} // end default constructor
 
 	/** Adds a new entry to this bag.
@@ -23,11 +23,11 @@ public final class LinkedBag1<T> implements BagInterface<T>
 	@Override
 	public boolean add(T newEntry) // OutOfMemoryError possible
 	{
-      // Add to beginning of chain:
+     		// Add to beginning of chain:
 		Node newNode = new Node(newEntry);
 		newNode.next = firstNode;  // Make new node reference rest of chain
                                  // (firstNode is null if chain is empty)
-      firstNode = newNode;       // New node is at beginning of chain
+     		firstNode = newNode;       // New node is at beginning of chain
 		numberOfEntries++;
       
 		return true;
@@ -38,22 +38,22 @@ public final class LinkedBag1<T> implements BagInterface<T>
 	@Override
 	public T[] toArray()
 	{
-      // The cast is safe because the new array contains null entries.
-      @SuppressWarnings("unchecked")
-      T[] result = (T[])new Object[numberOfEntries]; // Unchecked cast
-      
-      int index = 0;
-      Node currentNode = firstNode;
-      while ((index < numberOfEntries) && (currentNode != null))
-      {
-         result[index] = currentNode.data;
-         index++;
-         currentNode = currentNode.next;
-      } // end while
-      
-      return result;
-      // Note: The body of this method could consist of one return statement,
-      // if you call Arrays.copyOf
+	      // The cast is safe because the new array contains null entries.
+	      @SuppressWarnings("unchecked")
+	      T[] result = (T[])new Object[numberOfEntries]; // Unchecked cast
+	      
+	      int index = 0;
+	      Node currentNode = firstNode;
+	      while ((index < numberOfEntries) && (currentNode != null))
+	      {
+	         result[index] = currentNode.data;
+	         index++;
+	         currentNode = currentNode.next;
+	      } // end while
+	      
+	      return result;
+	      // Note: The body of this method could consist of one return statement,
+	      // if you call Arrays.copyOf
 	} // end toArray
    
 	/** Sees whether this bag is empty.
@@ -79,34 +79,57 @@ public final class LinkedBag1<T> implements BagInterface<T>
                 was successful, or null. */
 	@Override			
 	public T remove()
-   {
-      return null; // STUB
-   } // end remove
+	{
+	      T result = null;
+		if (firstNode != null)
+		{
+			result = firstNode.data;
+			firstNode = firstNode.next; // Remove first node from chain
+			numberOfEntries--;
+			return null; // STUB
+		} // end remove
+
+		return result;
+	} // end remove
    
 	/** Removes one occurrence of a given entry from this bag.
        @param anEntry  The entry to be removed.
        @return  True if the removal was successful, or false otherwise. */
 	@Override
-   public boolean remove(T anEntry)
-   {
-      return false; // STUB
-   } // end remove
+	   public boolean remove(T anEntry)
+	   {
+	      return false; // STUB
+	   } // end remove
 	
 	/** Removes all entries from this bag. */
 	@Override
 	public void clear()
-   {
-      // STUB
-   } // end clear
+	{
+		while (!isEmpty())
+			remove();// STUB
+	} // end clear
 	
 	/** Counts the number of times a given entry appears in this bag.
 		 @param anEntry  The entry to be counted.
 		 @return  The number of times anEntry appears in the bag. */
 	@Override
 	public int getFrequencyOf(T anEntry)
-   {
-      return 0; // STUB
-   } // end getFrequencyOf
+	{
+		int frequency = 0;
+		int counter = 0;
+		Node currentNode = firstNode;
+
+		while ((counter < numberOfEntries) && (currentNode.data != null))
+		{
+			if (anEntry.equals(currentNode.data))
+			{
+				frequency++;
+			}
+			counter++;
+			currentNode = currentNode.next;
+		}
+		return frequency;
+	} // end getFrequencyOf
 	
 	/** Tests whether this bag contains a given entry.
 		 @param anEntry  The entry to locate.
@@ -188,6 +211,42 @@ public final class LinkedBag1<T> implements BagInterface<T>
 		}
 		return intersectBag;
 	}
+
+	public BagInterface<T> difference(BagInterface<T> otherBag) {
+		// Create a new bag to store the difference
+		ResizableArrayBag<T> differenceBag = new ResizableArrayBag<>();
+
+		//Create an array from bag that has no duplicates
+		Set<T> tempSet = new HashSet<>();
+		T[] bagArray = this.toArray();
+		for (T element : bagArray) {
+			if (element != null) {
+				tempSet.add(element);
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		T[] tempArray = (T[]) new Object[tempSet.size()]; // Create an array of the same type as the input
+		T[] noDuplicates =  tempSet.toArray(tempArray);
+
+		for (int i = 0; i < noDuplicates.length; i++) {
+			T currentEntry = noDuplicates[i];
+
+			// Check if entry exists in otherBag with the same frequency
+			int frequencyInOtherBag = otherBag.getFrequencyOf(currentEntry);
+
+			// If current entry frequency in this bag exceeds otherBag's, add the difference
+			if (getFrequencyOf(currentEntry) > frequencyInOtherBag) {
+				int differenceFrequency = getFrequencyOf(currentEntry) - frequencyInOtherBag;
+				for (int j = 0; j < differenceFrequency; j++) {
+				differenceBag.add(currentEntry); // Add with remaining frequency
+				}
+			}
+		}// end of for loop
+
+
+		return differenceBag; // Return the new bag containing the difference
+	} //end of difference method
 } // end LinkedBag1
 
 
