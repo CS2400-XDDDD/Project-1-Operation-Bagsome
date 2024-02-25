@@ -50,4 +50,6 @@ public interface BagInterface<T>
 	public BagInterface<T> union(BagInterface<T> anotherBag);
 
 	public BagInterface<T> intersection(BagInterface<T> anotherBag);
+
+	public BagInterface<T> difference(BagInterface<T> otherBag);
 } // end BagInterface
