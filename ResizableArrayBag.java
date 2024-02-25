@@ -222,6 +222,29 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
       if (!integrityOK)
          throw new SecurityException ("ArrayBag object is corrupt.");
    } // end checkintegrity
+
+
+   // Method for union of two bags
+   public BagInterface<T> union(BagInterface<T> anotherBag) {
+      // Creates unionBag for return
+      BagInterface<T> unionBag = new ResizableArrayBag<>();
+
+      // Converts two bags into arrays
+      T[] bagOne = this.toArray();
+      T[] bagTwo = anotherBag.toArray();
+
+      // Adds data from bagOne into unionBag
+      for (T data : bagOne) {
+         unionBag.add(data);
+      }
+      // Adds data from bagTwo into unionBag
+      for (T data : bagTwo) {
+         unionBag.add(data);
+      }
+
+      // Returns result
+      return unionBag;
+   }
 } // end ResizableArrayBag
 
 /*
