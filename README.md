@@ -4,9 +4,9 @@
 XDDDD
 
 ## Group Members:
-Garrett Masuda - gsmasuda@cpp.edu
+Garrett Masuda - gsmasuda@cpp.edu - notgarrettmasuda
 
-Mason Orton - maorton@cpp.edu
+Mason Orton - maorton@cpp.edu - MasonAsemi
 
 Bijou Raj - bbraj@cpp.edu - BijouRaj
 
