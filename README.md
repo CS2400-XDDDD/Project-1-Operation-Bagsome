@@ -17,6 +17,6 @@ Mason Orton - Added intersection method to BagInterface, and implemented method 
 
 Bijou Raj - Added union method to BagInterface, and implemented method in ResizableBagArray and LinkedBag1. Created README.md file.
 
-## Extra features implemented:
+## Extra features implemented: none
 
-## Link to screencast:
+## Link to screencast: https://www.youtube.com/watch?v=32m5_Q8dmec
